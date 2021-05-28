@@ -1,0 +1,80 @@
+public class Time {
+	
+	 private int totalseconds;
+
+	    public Time(int hour, int minute, int second)
+	    {       
+	        this.totalseconds = (hour * 3600);
+	        this.totalseconds += (minute * 60);
+	        this.totalseconds += (second);
+	    }
+
+	    public Time(Time time)
+	    {
+	        this(time.getHour(), time.getMinute(), time.getSecond());
+	    }
+
+	    public void setTime(int hour, int minute, int second) 
+	    {
+	        if (hour < 0 || hour >= 24)
+	            throw new IllegalArgumentException("Hour must be 0-23");
+	        if (minute < 0 || minute >= 59)
+	            throw new IllegalArgumentException("Minute must be 0-59");
+	        if (second < 0 || second >= 59)
+	            throw new IllegalArgumentException("Hour must be 0-59");
+
+	         this.totalseconds = (hour * 3600);
+	         this.totalseconds += (minute * 60);
+	         this.totalseconds += (second);
+	    }
+	    
+	    public void setHour(int hour)
+	    {
+	        if (hour < 0 || hour >= 24)
+	            throw new IllegalArgumentException("Hour must be 0-23");
+	        this.totalseconds = (hour * 3600);
+	    }
+
+	    public void setMinute(int minute)
+	    {
+	        if (minute < 0 || minute >= 59)
+	            throw new IllegalArgumentException("Minute must be 0-59");
+	        this.totalseconds = (minute * 60);
+	    }
+
+	    public void setSecond(int second)
+	    {
+	        if (second < 0 || second >= 24)
+	            throw new IllegalArgumentException("Second must be 0-59");
+	        this.totalseconds = (second);
+	    }
+
+	    public int getHour()
+	    {
+	        return totalseconds / 3600;
+	    }
+
+	    public int getMinute()
+	    {
+	        return (totalseconds - (3600 * getHour())) / 60;
+	    }
+	    
+	    public int getSecond()
+	    {
+	        return totalseconds - (3600 * getHour()) - (60 * getMinute());
+	    }
+
+	    public String toUniversalString()
+	    {
+	        return String.format(
+	        "%02d:%02d:%02d", getHour(), getMinute(), getSecond());
+	    }
+
+	    public String toString()
+	    {
+	        return String.format("%d:%02d:%02d %s",((getHour() == 0 || getHour() ==
+	        12) ? 12 : getHour() % 12), getMinute(), getSecond(), (getHour()
+	        < 12 ? "AM" : "PM"));
+	    }
+
+}
